@@ -1,11 +1,5 @@
-.App {
-  text-align: center;
-  justify-content: center;
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  background-color: darkslategray;
-  color: aliceblue;
+#content {
+  padding: 15px;
 }
 
 
