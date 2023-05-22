@@ -5,7 +5,12 @@ import styles from "./styles.module.css"
 
 import { Button } from '@chakra-ui/react'
 
+import { useAuth } from "../../context/AuthContext";
+
 function Navbar() {
+    const { loggedIn } = useAuth();
+
+    console.log(loggedIn)
     return (
         <nav className={styles.nav}>
 
@@ -20,14 +25,26 @@ function Navbar() {
                 </ul>
             </div>
             <div className={styles.right}>
-                <Link to="/Signin" >
-                    <Button colorScheme='blue'>Login</Button>
-                </Link>
-                <Link to="/Signup" >
-                    <Button colorScheme='pink'>Register</Button>
-                </Link>
+                {
+                    !loggedIn &&
+                    <>
+                        <Link to="/Signin" >
+                            <Button colorScheme='blue'>Login</Button>
+                        </Link>
+                        <Link to="/Signup" >
+                            <Button colorScheme='pink'>Register</Button>
+                        </Link>
 
-
+                    </>
+                }
+                {
+                    loggedIn &&
+                    <>
+                    <Link to="/Profile" >
+                        <Button colorScheme='yellow'>Profile</Button>
+                    </Link>
+                    </>
+                }
             </div>
         </nav>
     )

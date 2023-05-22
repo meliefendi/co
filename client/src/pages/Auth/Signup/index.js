@@ -1,23 +1,39 @@
 
 import React from "react";
-import { Box, Button, Flex, FormControl, FormLabel, Heading, Input } from '@chakra-ui/react'
+import { Alert, Box, Button, Flex, FormControl, FormLabel, Heading, Input } from '@chakra-ui/react'
 
 import { useFormik } from "formik";
 
 import validationSchema from "./validations";
 
+import { fetchRegister } from "../../../api";
+
+import { useAuth } from "../../../context/AuthContext";
+
 function Signup() {
+    const { login } = useAuth();
+    
     const formik = useFormik({
         initialValues: {
             email: "",
             password: "",
             passwordConfirm: "",
         },
-         validationSchema,
+        validationSchema,
         onSubmit: async (values, bag) => {
-            console.log(values)
+            try {
+                const registerResponse = await fetchRegister({
+                    email: values.email,
+                    password: values.password,
+                });
+
+                login(registerResponse);
+
+            } catch (e) {
+                bag.setErrors({ general: e.response.data.message })
+            }
         },
-        
+
     });
     return (
         <div>
@@ -28,6 +44,28 @@ function Signup() {
                             Sign Up
                         </Heading>
                     </Box>
+                    <Box my={5}>
+                        {
+                            formik.errors.general && (
+                                <Alert status="error" > {formik.errors.general} </Alert>
+                            )
+                        }
+                        {
+                            formik.errors.email && formik.touched.email && (
+                                <Alert status="error" > {formik.errors.email} </Alert>
+                            )
+                        }
+                        {
+                            formik.errors.password && formik.touched.password && (
+                                <Alert status="error" > {formik.errors.password} </Alert>
+                            )
+                        }
+                        {
+                            formik.errors.passwordConfirm && formik.touched.passwordConfirm && (
+                                <Alert status="error" > {formik.errors.passwordConfirm} </Alert>
+                            )
+                        }
+                    </Box>
                     <Box my="5" textAlign="left" >
                         <form onSubmit={formik.handleSubmit} >
                             <FormControl >
@@ -37,7 +75,9 @@ function Signup() {
                                     onChange={formik.handleChange}
                                     onBlur={formik.handleBlur}
                                     value={formik.values.email}
+                                    isInvalid={formik.touched.email && formik.errors.email}
                                 ></Input>
+
                             </FormControl>
                             <FormControl mt="4" >
                                 <FormLabel>Password</FormLabel>
@@ -46,7 +86,9 @@ function Signup() {
                                     onChange={formik.handleChange}
                                     onBlur={formik.handleBlur}
                                     value={formik.values.password}
+                                    isInvalid={formik.touched.password && formik.errors.password}
                                 ></Input>
+
                             </FormControl>
                             <FormControl mt="4" >
                                 <FormLabel>Password Confirm</FormLabel>
@@ -55,7 +97,9 @@ function Signup() {
                                     onChange={formik.handleChange}
                                     onBlur={formik.handleBlur}
                                     value={formik.values.passwordConfirm}
+                                    isInvalid={formik.touched.passwordConfirm && formik.errors.passwordConfirm}
                                 ></Input>
+
                             </FormControl>
                             <Button type="submit" width="full" mt="4" colorScheme="teal" >Sign Up</Button>
                         </form>
