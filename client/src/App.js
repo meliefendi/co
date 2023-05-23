@@ -9,6 +9,8 @@ import Products from "./pages/Products"
 import ProductDetail from "./pages/ProductDetail";
 import Profile from "./pages/Profile";
 
+import ProtectedRoute from "./pages/ProtectedRoute";
+
 function App() {
   return (
     <Router>
@@ -17,10 +19,13 @@ function App() {
         <div id="content">
           <Routes>
             <Route path='/' exact element={<Products />} />
-            <Route path='/product/:product_id'  element={<ProductDetail />} />
+            <Route path='/product/:product_id' element={<ProductDetail />} />
             <Route path='/Signin' element={<Signin />} />
             <Route path='/Signup' element={<Signup />} />
-            <Route path='/Profile' element={<Profile />} />
+
+            <Route element={<ProtectedRoute />}>
+              <Route path="/profile" element={<Profile />} />
+            </Route>
           </Routes>
         </div>
       </div>

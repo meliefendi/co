@@ -10,9 +10,14 @@ import { fetchRegister } from "../../../api";
 
 import { useAuth } from "../../../context/AuthContext";
 
+import { useNavigate } from "react-router-dom";
+
+
 function Signup() {
     const { login } = useAuth();
-    
+     //kayıt işlemi sonrası profile yönlendirmesi
+    const navigate = useNavigate();
+
     const formik = useFormik({
         initialValues: {
             email: "",
@@ -27,7 +32,11 @@ function Signup() {
                     password: values.password,
                 });
 
+
                 login(registerResponse);
+                //kayıt işlemi sonrası profile yönlendirmesi
+                navigate("../Profile")
+
 
             } catch (e) {
                 bag.setErrors({ general: e.response.data.message })
