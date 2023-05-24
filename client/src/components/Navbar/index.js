@@ -6,9 +6,11 @@ import styles from "./styles.module.css"
 import { Button } from '@chakra-ui/react'
 
 import { useAuth } from "../../context/AuthContext";
+import { useBasket } from "../../context/BasketContext";
 
 function Navbar() {
     const { loggedIn } = useAuth();
+    const { items } = useBasket();
 
     console.log(loggedIn)
     return (
@@ -40,6 +42,13 @@ function Navbar() {
                 {
                     loggedIn &&
                     <>
+                    {
+                        items.length > 0 && (
+                            <Link to="/Basket" >
+                                <Button colorScheme="pink" variant="outline" >Basket ({items.length}) </Button>
+                            </Link>
+                        )
+                    }
                     <Link to="/Profile" >
                         <Button colorScheme='yellow'>Profile</Button>
                     </Link>

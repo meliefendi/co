@@ -6,8 +6,11 @@ import { Button, Text, Box, Flex } from '@chakra-ui/react';
 import moment from "moment";
 import ImageGallery from 'react-image-gallery';
 
+import { useBasket } from '../../context/BasketContext';
+
 function ProductDetail() {
     const { product_id } = useParams();
+    const { addToBasket, items } = useBasket();
 
     const { isLoading, isError, data } = useQuery(["product", product_id], () =>
         fetchProduct(product_id));
@@ -19,8 +22,10 @@ function ProductDetail() {
     if (isError) {
         return <div> error.message </div>
     }
-  
 
+    // basket içerisinde tekrar ürün karşılaştırması.
+    const findBasketItem = items.find((item) => item._id === product_id);
+    //imageGallery foto calipso 
     const images = data.photos.map((url) => ({ original: url }));
     return (
         <div>
@@ -31,12 +36,17 @@ function ProductDetail() {
             <hr />
             <Text > {data.description} </Text>
 
+            <Flex justify="center"> <Button colorScheme={findBasketItem ? "pink" : "yellow"} onClick={() => addToBasket(data, findBasketItem)} >
+                {
+                    //ürün olması veya olmaması durumunda seçilim
+                    findBasketItem ? "Remove from basket" : " Add to basket"
+                }
+            </Button> </Flex>
+
             <Box margin="10">
                 <ImageGallery items={images} />
             </Box>
-            <Flex justify="center"> <Button colorScheme='yellow'  >
-                Add to basket
-            </Button> </Flex>
+
 
         </div>
     )

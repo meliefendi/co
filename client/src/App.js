@@ -8,6 +8,8 @@ import Signup from "./pages/Auth/Signup";
 import Products from "./pages/Products"
 import ProductDetail from "./pages/ProductDetail";
 import Profile from "./pages/Profile";
+import Basket from "./pages/Basket";
+import Error404 from "./pages/Error404";
 
 import ProtectedRoute from "./pages/ProtectedRoute";
 
@@ -22,6 +24,12 @@ function App() {
             <Route path='/product/:product_id' element={<ProductDetail />} />
             <Route path='/Signin' element={<Signin />} />
             <Route path='/Signup' element={<Signup />} />
+
+            <Route path='/Basket' element={<Basket />} />
+
+            <Route path='*' element={<Error404 />} />
+
+
 
             <Route element={<ProtectedRoute />}>
               <Route path="/profile" element={<Profile />} />

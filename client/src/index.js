@@ -6,6 +6,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 import { AuthProvider } from './context/AuthContext';
+import { BasketProvider } from './context/BasketContext';
 
 import { ChakraProvider } from '@chakra-ui/react'
 
@@ -29,9 +30,11 @@ root.render(
     <QueryClientProvider client={queryClient}>
 
       <ChakraProvider>
-        
+
         <AuthProvider>
-          <App />
+          <BasketProvider>
+            <App />
+          </BasketProvider>
         </AuthProvider>
 
       </ChakraProvider>
