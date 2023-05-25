@@ -11,6 +11,11 @@ import Profile from "./pages/Profile";
 import Basket from "./pages/Basket";
 import Error404 from "./pages/Error404";
 
+import ProtectedAdmin from "./pages/Admin/ProtectedAdmin";
+import AdminHome from "./pages/Admin/Home";
+import Orders from "./pages/Admin/Orders";
+import AdminProducts from "./pages/Admin/Products";
+
 import ProtectedRoute from "./pages/ProtectedRoute";
 
 function App() {
@@ -29,11 +34,24 @@ function App() {
 
             <Route path='*' element={<Error404 />} />
 
+            <Route element={<ProtectedAdmin />}>
+						{/* https://www.robinwieruch.de/react-router-nested-routes/ */}
+						<Route index path="/Admin" element={<AdminHome />} />
+						<Route path="/Admin/orders" element={<Orders />} />
+						<Route path="/Admin/AdminProducts" element={<AdminProducts />} />
+						{/* <Route
+							path="/admin/products/:product_id"
+							element={<AdminProductsDetail />}
+						/>
+						<Route path="/admin/products/new" element={<NewProduct />} /> */}
+					</Route>
+
 
 
             <Route element={<ProtectedRoute />}>
               <Route path="/profile" element={<Profile />} />
             </Route>
+
           </Routes>
         </div>
       </div>

@@ -61,4 +61,17 @@ export const fetchLogout = async () => {
     );
 
     return data;
+};
+//orderdan gönderilen bilgi 
+export const postOrder = async (input) => {
+    const { data } = await axios.post(`${process.env.REACT_APP_BASE_ENDPOINT}/order`, input);
+
+    return data;
+};
+
+//admin orders
+export const fetchOrders = async () => {
+    const { data } = await axios.get(`${process.env.REACT_APP_BASE_ENDPOINT}/order`)
+
+    return data;
 }

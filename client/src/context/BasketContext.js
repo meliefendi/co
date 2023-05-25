@@ -11,7 +11,7 @@ const BasketProvider = ({ children }) => {
     const [items, setItems] = useState(defaultBasket);
 
     //localStorage
-    useEffect(()=> {
+    useEffect(() => {
         localStorage.setItem("basket", JSON.stringify(items));
     }, [items]);
 
@@ -31,7 +31,9 @@ const BasketProvider = ({ children }) => {
     const removeFromBasket = (item_id) => {
         const filtered = items.filter((item) => item._id !== item_id);
         setItems(filtered)
-    }
+    };
+    //order adres ve ürün gönderme işlemi sonrası sepeti boşaltma
+    const emptyBasket = () => setItems([]);
 
 
     const values = {
@@ -39,6 +41,7 @@ const BasketProvider = ({ children }) => {
         setItems,
         addToBasket,
         removeFromBasket,
+        emptyBasket,
     };
 
     return (
