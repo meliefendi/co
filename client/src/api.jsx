@@ -4,50 +4,67 @@ import axios from "axios";
 
 //site içerisinde login olmayı sağlayan bölüm
 axios.interceptors.request.use(function (config) {
- 
+
     const { origin } = new URL(config.url);
 
-    const allowedOrigins = [ process.env.REACT_APP_BASE_ENDPOINT ];
+    const allowedOrigins = [process.env.REACT_APP_BASE_ENDPOINT];
     const token = localStorage.getItem("access-token");
-    
-    if(allowedOrigins.includes(origin)){
+
+    if (allowedOrigins.includes(origin)) {
         config.headers.Authorization = token
     }
     return config;
 },
-   function (error) {
-    // Do something with request error
-    return Promise.reject(error);
-  });
+    function (error) {
+        // Do something with request error
+        return Promise.reject(error);
+    });
 
 
-export const fetchProductList = async({ pageParam = 0 }) => {
+export const fetchProductList = async ({ pageParam = 0 }) => {
     const { data } = await axios.get(`${process.env.REACT_APP_BASE_ENDPOINT}/product?page=${pageParam}`);
-    
+
 
     return data;
 };
+//adminproduct
+export const fetchAllProducts = async () => {
+    const { data } = await axios.get(`${process.env.REACT_APP_BASE_ENDPOINT}/product`);
+    return data;
+};
+//admindelete
+export const deleteProduct = async (product_id) => {
+	const { data } = await axios.delete(`${process.env.REACT_APP_BASE_ENDPOINT}/product/${product_id}`);
+	return data;
+};
 
-export const fetchProduct = async(product_id) => {
+export const fetchProduct = async (product_id) => {
     const { data } = await axios.get(`${process.env.REACT_APP_BASE_ENDPOINT}/product/${product_id}`);
-    
+
+
+    return data;
+};
+//admin ürün kayıt
+export const postProduct = async (input) => {
+    const { data } = await axios.post(`${process.env.REACT_APP_BASE_ENDPOINT}/product`, input);
+
 
     return data;
 };
 
-export const fetchRegister = async(input) => {
+export const fetchRegister = async (input) => {
     const { data } = await axios.post(`${process.env.REACT_APP_BASE_ENDPOINT}/auth/register`, input);
 
     return data;
 };
 
-export const fetchLogin = async(input) => {
+export const fetchLogin = async (input) => {
     const { data } = await axios.post(`${process.env.REACT_APP_BASE_ENDPOINT}/auth/login`, input);
 
     return data;
 };
 
-export const fetchMe = async () =>{
+export const fetchMe = async () => {
     const { data } = await axios.get(`${process.env.REACT_APP_BASE_ENDPOINT}/auth/me`);
 
     return data;
@@ -55,9 +72,9 @@ export const fetchMe = async () =>{
 
 export const fetchLogout = async () => {
     const { data } = await axios.post(`${process.env.REACT_APP_BASE_ENDPOINT}/auth/logout`,
-    {
-        refresh_token: localStorage.getItem("refresh-token")
-    }
+        {
+            refresh_token: localStorage.getItem("refresh-token")
+        }
     );
 
     return data;
@@ -72,6 +89,13 @@ export const postOrder = async (input) => {
 //admin orders
 export const fetchOrders = async () => {
     const { data } = await axios.get(`${process.env.REACT_APP_BASE_ENDPOINT}/order`)
+
+    return data;
+};
+
+//admin edit page
+export const updateProduct = async (input, product_id) => {
+    const { data } = await axios.put(`${process.env.REACT_APP_BASE_ENDPOINT}/product/${product_id}`, input)
 
     return data;
 }

@@ -6,7 +6,7 @@ import { useFormik } from "formik";
 
 import validationSchema from "./validations";
 
-import { fetchLogin, fetchRegister } from "../../../api";
+import { fetchLogin } from "../../../api";
 
 import { useAuth } from "../../../context/AuthContext";
 
@@ -56,16 +56,6 @@ function Signin() {
                         {
                             formik.errors.general && (
                                 <Alert status="error" > {formik.errors.general} </Alert>
-                            )
-                        }
-                        {
-                            formik.errors.email && formik.touched.email && (
-                                <Alert status="error" > {formik.errors.email} </Alert>
-                            )
-                        }
-                        {
-                            formik.errors.password && formik.touched.password && (
-                                <Alert status="error" > {formik.errors.password} </Alert>
                             )
                         }
                       

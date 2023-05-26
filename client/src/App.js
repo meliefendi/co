@@ -15,6 +15,8 @@ import ProtectedAdmin from "./pages/Admin/ProtectedAdmin";
 import AdminHome from "./pages/Admin/Home";
 import Orders from "./pages/Admin/Orders";
 import AdminProducts from "./pages/Admin/Products";
+import AdminProductsDetail from "./pages/Admin/AdminProductDetail/AdminProductDetail";
+import NewProduct from "./pages/Admin/Products/new";
 
 import ProtectedRoute from "./pages/ProtectedRoute";
 
@@ -34,17 +36,14 @@ function App() {
 
             <Route path='*' element={<Error404 />} />
 
+            {/* Outlet */}
             <Route element={<ProtectedAdmin />}>
-						{/* https://www.robinwieruch.de/react-router-nested-routes/ */}
-						<Route index path="/Admin" element={<AdminHome />} />
-						<Route path="/Admin/orders" element={<Orders />} />
-						<Route path="/Admin/AdminProducts" element={<AdminProducts />} />
-						{/* <Route
-							path="/admin/products/:product_id"
-							element={<AdminProductsDetail />}
-						/>
-						<Route path="/admin/products/new" element={<NewProduct />} /> */}
-					</Route>
+              <Route index path="/Admin" element={<AdminHome />} />
+              <Route path="/Admin/orders" element={<Orders />} />
+              <Route path="/Admin/AdminProducts" element={<AdminProducts />} />
+              <Route path="/admin/products/:product_id" element={<AdminProductsDetail />} />
+              <Route path="/admin/products/new" element={<NewProduct />} />
+            </Route>
 
 
 

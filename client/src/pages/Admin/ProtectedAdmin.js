@@ -24,6 +24,7 @@ function ProtectedAdmin() {
 					<li>
 						<Link to={"/admin/AdminProducts"}>Products</Link>
 					</li>
+                    
                 </ul>
             </nav>
             <Box mt={10}>

@@ -8,13 +8,7 @@ import { fetchProductList } from '../../api';
 
 
 function Products() {
-  const { data,
-    error,
-    fetchNextPage,
-    hasNextPage,
-    isFetching,
-    isFetchingNextPage,
-    status, } = useInfiniteQuery('products', fetchProductList,
+  const { data, error,fetchNextPage, hasNextPage, isFetching, isFetchingNextPage, status, } = useInfiniteQuery('products', fetchProductList,
       {
         getNextPageParam: (lastGroup, allGroup) => {
           const morePagesExist = lastGroup?.length === 12;
