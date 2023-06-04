@@ -9,4 +9,4 @@
 9. işlem tamamlandı sıradaki ders için hazırız.
 
 
-![](./Untitled.mp4)
+![](video/Untitled.mp4)
