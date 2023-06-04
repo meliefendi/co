@@ -7,3 +7,6 @@
 7. mongoya aktarılan klasöre diğer elimizde olan database verilerini aktardık. 
 8. dersteki işlemleri uyguladık aynı şekilde ve herhangi problem olmadı.
 9. işlem tamamlandı sıradaki ders için hazırız.
+
+
+![](Untitled.mp4)
