@@ -13,6 +13,8 @@ import { ChakraProvider } from '@chakra-ui/react'
 import { ReactQueryDevtools } from 'react-query/devtools'
 
 import { QueryClient, QueryClientProvider } from 'react-query'
+
+//BU KISIM VERİLERİ TEKRAR TEKRAR ÇEKMEYE ENGEL OLUR. BİR KEZ ALINDI MI Bİ DAHA ALINMAZ TEKRAR TEKRAR.
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
